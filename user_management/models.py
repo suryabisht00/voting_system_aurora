@@ -1,4 +1,5 @@
-# Create your models here.
+# for addding detail menulally in admin panel for varifaication of user at the time of voting
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -7,6 +8,10 @@ class User(AbstractUser):
     voter_id = models.CharField(max_length=10, unique=True, null=True, blank=True)
     mobile_number = models.CharField(max_length=10, unique=True)
     is_verified = models.BooleanField(default=False)
+    constituency = models.CharField(max_length=100, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+    father_name = models.CharField(max_length=100, null=True, blank=True)
+    dob = models.DateField(null=True, blank=True)
 
     # Add related_name attributes to avoid clashes
     groups = models.ManyToManyField(
