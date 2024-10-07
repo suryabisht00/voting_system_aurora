@@ -14,3 +14,4 @@ class Vote(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     blockchain_hash = models.CharField(max_length=64, unique=True)  # Blockchain record
     timestamp = models.DateTimeField(auto_now_add=True)
+
