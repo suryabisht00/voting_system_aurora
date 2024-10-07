@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     # Custom apps
+    'django_extensions',
     'user_management',
     'aadhaar_',
     'voter_id_',
