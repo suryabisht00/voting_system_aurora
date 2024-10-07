@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+button {
+    background-color: #ff6347; /* Tomato background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 20px 40px; /* Increased padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Get the element to line up correctly */
+    font-size: 18px; /* Increased font size */
+    margin: 10px 2px; /* Increased margin */
+    cursor: pointer; /* Pointer/hand icon */
+    border-radius: 12px; /* Rounded corners */
+    transition-duration: 0.4s; /* 0.4 seconds transition effect to hover state */
+}
+
+button:hover {
+    background-color: white; /* White background on hover */
+    color: black; /* Black text on hover */
+    border: 2px solid #ff6347; /* Tomato border on hover */
+}
+
+@media (max-width: 600px) {
+    button {
+        padding: 10px 20px; /* Reduced padding */
+        font-size: 16px; /* Reduced font size */
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #ff4500;
+    border: 2px solid #ff4500;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.candidates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.candidate {
+    background-color: white;
+    border: 2px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s;
+    border-radius: 5px;
+    overflow: hidden; /* Ensure children are contained */
+}
+
+.candidate img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.candidate p {
+    margin: 10px 0 0;
+}
+
+.candidate:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .candidate {
+        width: 100px;
+    }
+}

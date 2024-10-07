@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Candidate</title>
+    <link rel="stylesheet" href="{% static 'css/voting_main_page.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Select Your Candidate</h1>
+        </div>
+        <div class="candidates">
+            {% for candidate in candidates %}
+            <div class="candidate">
+                <img src="{% static 'images/ss2.jpg' %}" alt="Candidate Image">
+                <p>{{ candidate.name }}</p>
+                <button onclick="voteForCandidate('{{ candidate.id }}')">Vote</button>
+                <p id="confirmation-{{ candidate.id }}" style="display:none;">Thank you for voting!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{% static 'js/voting_main_page.js' %}"></script>
+
+</body>
+</html>
