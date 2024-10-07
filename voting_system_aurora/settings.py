@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'voting',
 ]
 
+# voting_system/settings.py
+
+AUTH_USER_MODEL = 'user_management.User'
 
 
 
