@@ -23,3 +23,147 @@ Functionality:
 Manages the voting process (casting votes, viewing candidates).
 Integrates with blockchain to record votes in a tamper-proof manner.
 Stores vote data, including blockchain transaction hashes for integrity.
+
+
+
+
+
+
+
+
+
+Database structure:-
+
+
++--------------------------------------------------+
+|                   User Management                 |
+|                   (user_management.User)          |
++--------------------------------------------------+
+| - user_id: AutoField (PK)                        |
+| - aadhaar_number: CharField (unique)             |
+| - voter_id: CharField (unique)                   |
+| - mobile_number: CharField (unique)              |
+| - is_verified: BooleanField                        |
+| - username: CharField (unique)                    |
+| - password: CharField                             |
+| - first_name: CharField                           |
+| - last_name: CharField                            |
+| - email: EmailField                               |
+| - date_joined: DateTimeField                      |
+| - last_login: DateTimeField                       |
++--------------------------------------------------+
+                  | 1
+                  |
+                  | 1
++-----------------+----------------+
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
++----------------------------------+
+|                Aadhaar           |
+|                (aadhaar.Aadhaar) |
++----------------------------------+
+| - aadhaar_id: AutoField (PK)     |
+| - user: OneToOneField (FK)       |
+| - aadhaar_number: CharField (unique) |
+| - name: CharField                 |
+| - father_name: CharField          |
+| - dob: DateField                  |
+| - address: TextField              |
+| - gender: CharField               |
+| - mobile_number: CharField        |
+| - photo: ImageField               |
+| - created_at: DateTimeField       |
++----------------------------------+
+                  | 1
+                  |
+                  | 1
++-----------------+----------------+
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
++----------------------------------+
+|               Voter ID           |
+|              (voter_id.VoterID)  |
++----------------------------------+
+| - voter_id: AutoField (PK)       |
+| - user: OneToOneField (FK)       |
+| - voter_id: CharField (unique)    |
+| - name: CharField                 |
+| - father_name: CharField          |
+| - dob: DateField                  |
+| - address: TextField              |
+| - gender: CharField               |
+| - photo: ImageField               |
+| - created_at: DateTimeField       |
++----------------------------------+
+
++--------------------------------------------------+
+|                  Verification                    |
+|                (verification.ExtractedData)      |
++--------------------------------------------------+
+| - extracted_id: AutoField (PK)                   |
+| - user: ForeignKey (FK)                           |
+| - extracted_name: CharField                       |
+| - extracted_father_name: CharField                |
+| - extracted_dob: DateField                        |
+| - extracted_address: TextField                    |
+| - extracted_gender: CharField                     |
+| - extracted_aadhaar_number: CharField            |
+| - extracted_voter_id: CharField                   |
+| - extracted_photo: ImageField                     |
+| - created_at: DateTimeField                       |
++--------------------------------------------------+
+                  |
+                  | 1
+                  |
+                  |
++-----------------+----------------+
+|                                  |
+|                                  |
+|                                  |
+|                                  |
++----------------------------------+
+|               Verification       |
+|            (verification.Verification) |
++----------------------------------+
+| - verification_id: AutoField (PK) |
+| - user: ForeignKey (FK)           |
+| - aadhaar_status: BooleanField    |
+| - voter_id_status: BooleanField    |
+| - photo_status: BooleanField       |
+| - verification_timestamp: DateTimeField |
++----------------------------------+
+
++----------------------------------+
+|              Candidate           |
+|             (voting.Candidate)   |
++----------------------------------+
+| - candidate_id: AutoField (PK)   |
+| - name: CharField                 |
+| - party: CharField                |
+| - constituency: CharField         |
++----------------------------------+
+
++----------------------------------+
+|              Vote                |
+|              (voting.Vote)       |
++----------------------------------+
+| - vote_id: AutoField (PK)        |
+| - user: ForeignKey (FK)          |
+| - candidate: ForeignKey (FK)     |
+| - blockchain_hash: CharField (unique) |
+| - timestamp: DateTimeField       |
++----------------------------------+
