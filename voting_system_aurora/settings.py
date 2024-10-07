@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     
     # Custom apps
     'user_management',
-    'aadhaar',
-    'voter_id',
+    'aadhaar_',
+    'voter_id_',
     'verification',
     'voting',
 ]
