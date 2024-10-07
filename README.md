@@ -1,6 +1,6 @@
 1. User Management App
 Functionality:
-Handles user registration, login, and authentication.
+use to add user in database, Handles user registration, login, and authentication.
 Manages SMS-based OTP verification using services like Twilio.
 Stores user details such as Aadhaar and Voter ID associations.
 2. Aadhaar App
