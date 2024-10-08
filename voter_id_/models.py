@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from user_management.models import User
 
 class VoterID(models.Model):
@@ -14,3 +11,4 @@ class VoterID(models.Model):
     gender = models.CharField(max_length=10)
     photo = models.ImageField(upload_to='voter_photos/')
     created_at = models.DateTimeField(auto_now_add=True)
+    constituency = models.CharField(max_length=100, null=True, blank=True)  # New field

@@ -16,11 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls import include, path 
-from voting import views
+from voting import views  # Import views from the voting app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('confirmation/', views.confirmation_view, name='confirmation'),
+    
+    # Voting page where candidates are displayed
+    path('', views.voting_page, name='voting_page'),
+    
+    # Path for casting the vote
+    path('voting/cast_vote/', views.cast_vote, name='cast_vote'),
+    
+    # Path for the confirmation page after successful voting
+    path('voting/after_successful_voting/', views.after_successful_voting, name='after_successful_voting'),
 ]
