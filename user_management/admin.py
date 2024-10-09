@@ -1,14 +1,25 @@
 from django.contrib import admin
-from django.core.exceptions import ValidationError
-from .models import User
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'aadhaar_number', 'voter_id', 'mobile_number', 'is_verified', 'constituency', 'address', 'father_name', 'dob')
-    fields = ('username', 'aadhaar_number', 'voter_id', 'mobile_number', 'is_verified', 'constituency', 'address', 'father_name', 'dob', 'password', 'groups', 'user_permissions')
+# Register your models here.
+from django.contrib import admin
+from .models import Admin, Candidate, CitizenData
 
-    def save_model(self, request, obj, form, change):
-        if not change and User.objects.filter(mobile_number=obj.mobile_number).exists():
-            raise ValidationError('Mobile number must be unique.')
-        super().save_model(request, obj, form, change)
+# Register Admin model
+@admin.register(Admin)
+class AdminAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'mobile', 'email')
+    search_fields = ('user_id', 'email', 'mobile')
 
-admin.site.register(User, UserAdmin)
+# Register Candidate model
+@admin.register(Candidate)
+class CandidateAdmin(admin.ModelAdmin):
+    list_display = ('candidate_name', 'constituency', 'party', 'vote_count')
+    search_fields = ('candidate_name', 'constituency', 'party')
+    list_filter = ('constituency', 'party')
+
+# Register CitizenData model
+@admin.register(CitizenData)
+class CitizenDataAdmin(admin.ModelAdmin):
+    list_display = ('citizen_name', 'father_name', 'gender', 'dob', 'mobile', 'email', 'aadhaar_number', 'voter_id_number')
+    search_fields = ('citizen_name', 'aadhaar_number', 'voter_id_number', 'mobile', 'email')
+    list_filter = ('gender', 'dob')

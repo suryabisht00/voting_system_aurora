@@ -2,16 +2,13 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-from user_management.models import User
 
-class Candidate(models.Model):
-    name = models.CharField(max_length=100)
-    party = models.CharField(max_length=100)
-    constituency = models.CharField(max_length=100)
+# Assuming you have a CitizenData model in user_management app
+class VotingStatus(models.Model):
+    citizen = models.ForeignKey('user_management.CitizenData', on_delete=models.CASCADE)
+    constituency = models.IntegerField(default=0)  # Default value for constituency
+    blockchain_hash = models.CharField(max_length=255, default='0')  # Default value for blockchain hash
+    status = models.CharField(max_length=10, choices=[('voted', 'Voted'), ('not_voted', 'Not Voted')], default='not_voted')
 
-class Vote(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    blockchain_hash = models.CharField(max_length=64, unique=True)  # Blockchain record
-    timestamp = models.DateTimeField(auto_now_add=True)
-
+    def __str__(self):
+        return f"{self.citizen.citizen_name} - {self.status}"

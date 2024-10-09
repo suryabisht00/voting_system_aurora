@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='VotingStatus',
+            name='AadhaarVerification',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('constituency', models.IntegerField(default=0)),
-                ('blockchain_hash', models.CharField(default='0', max_length=255)),
-                ('status', models.CharField(choices=[('voted', 'Voted'), ('not_voted', 'Not Voted')], default='not_voted', max_length=10)),
+                ('upload_aadhaar_data_status', models.BooleanField(default=False)),
+                ('upload_voter_card_data_status', models.BooleanField(default=False)),
+                ('upload_photo_status', models.BooleanField(default=False)),
                 ('citizen', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user_management.citizendata')),
             ],
         ),
