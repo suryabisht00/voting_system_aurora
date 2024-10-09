@@ -47,15 +47,28 @@ def admin_panel(request):
 
     return render(request, 'admin_panel.html')  # Render the admin login page
 
-# Admin Editing Page View (after successful login)
-def admin_editing(request):
-    # Ensure that the user is logged in as admin (session check)
-    if 'admin_user_id' not in request.session:
-        return redirect('admin_panel')  # If not logged in, redirect to admin login
 
-    # Admin editing logic can be added here
+@login_required
+def admin_editing(request):
+    # Ensure the admin user is logged in (session check)
+    if 'admin_user_id' not in request.session:
+        return redirect('admin_panel')
+
+    # Render the admin editing page with buttons
     return render(request, 'admin_editing.html')
 
+# Views to handle redirection for each button
+@login_required
+def add_new_user(request):
+    return redirect('add_new_user')  # You can replace this with the actual logic
+
+@login_required
+def edit_existing_user(request):
+    return redirect('edit_existing_user')  # You can replace this with the actual logic
+
+@login_required
+def add_edit_candidate(request):
+    return redirect('add_edit_candidate')  # You can replace this with the actual logic
 
 
 
