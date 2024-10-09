@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     {% load static %}  <!-- Add this line to load the static tag library -->
-    <link rel="stylesheet" href="{% static 'home_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
 </head>
 <body>
     <div class="container">
@@ -17,6 +17,6 @@
             <a href="{% url 'result' %}" class="button">Result</a>
         </div>
     </div>
-    <script src="{% static 'home_page.js' %}"></script>
+    <script src="{% static 'js/home_page.js' %}"></script>
 </body>
 </html>

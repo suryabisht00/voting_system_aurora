@@ -1,0 +1,22 @@
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Editing Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/admin_editing.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Editing Page</h1>
+        <div class="button-container">
+            <a href="{% url 'add_user' %}" class="button">Add User</a>
+            <a href="{% url 'edit_user' %}" class="button">Edit User</a>
+            <a href="{% url 'delete_user' %}" class="button">Delete User</a>
+            <a href="{% url 'admin_panel' %}" class="button">Back</a>
+        </div>
+    </div>
+    <script src="{% static 'js/admin_editing.js' %}"></script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Page</title>
+    {% load static %}  
+    <link rel="stylesheet" href="{% static 'css/admin_panel.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Panel Login</h2>
+        
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form id="loginForm" method="POST" action="{% url 'admin_panel' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="user_id">User ID:</label>
+                <input type="text" id="user_id" name="user_id" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/admin_panel.js' %}"></script>
+</body>
+</html>
