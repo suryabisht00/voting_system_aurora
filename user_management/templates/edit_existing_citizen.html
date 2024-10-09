@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Existing Citizen</title>
+    <link rel="stylesheet" href="{% static 'css/edit_existing_citizen.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Existing Citizen</h1>
+
+        <!-- Search Bar -->
+        <input type="text" id="searchInput" placeholder="Search by Aadhaar, Voter ID, or Name" autocomplete="off">
+
+        <!-- Results Container -->
+        <div id="resultsContainer">
+            <!-- Citizens data will appear here -->
+        </div>
+    </div>
+
+    <script src="{% static 'js/edit_existing_citizen.js' %}"></script>
+</body>
+</html>

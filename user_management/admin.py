@@ -1,7 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin
 from .models import Admin, Candidate, CitizenData
 
 # Register Admin model
@@ -20,6 +17,6 @@ class CandidateAdmin(admin.ModelAdmin):
 # Register CitizenData model
 @admin.register(CitizenData)
 class CitizenDataAdmin(admin.ModelAdmin):
-    list_display = ('citizen_name', 'father_name', 'gender', 'dob', 'mobile', 'email', 'aadhaar_number', 'voter_id_number')
+    list_display = ('citizen_name', 'father_name', 'gender', 'dob', 'mobile', 'email', 'aadhaar_number', 'voter_id_number', 'constituency')  # Added 'constituency'
     search_fields = ('citizen_name', 'aadhaar_number', 'voter_id_number', 'mobile', 'email')
-    list_filter = ('gender', 'dob')
+    list_filter = ('gender', 'dob', 'constituency')  # Added 'constituency' to list_filter

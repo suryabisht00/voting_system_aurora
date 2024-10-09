@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Citizen</title>
+    <link rel="stylesheet" href="{% static 'css/edit_citizen2.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Citizen Information</h2>
+        <form id="editCitizenForm" method="POST" action="{% url 'update_citizen' citizen.id %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="citizen_name">Citizen Name:</label>
+                <input type="text" id="citizen_name" name="citizen_name" value="{{ citizen.citizen_name }}" required>
+            </div>
+            <div class="input-group">
+                <label for="father_name">Father Name:</label>
+                <input type="text" id="father_name" name="father_name" value="{{ citizen.father_name }}" required>
+            </div>
+            <div class="input-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male" {% if citizen.gender == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if citizen.gender == 'Female' %}selected{% endif %}>Female</option>
+                    <option value="Other" {% if citizen.gender == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="{{ citizen.dob }}" required>
+            </div>
+            <div class="input-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required>{{ citizen.address }}</textarea>
+            </div>
+            <div class="input-group">
+                <label for="mobile">Mobile:</label>
+                <input type="text" id="mobile" name="mobile" value="{{ citizen.mobile }}" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ citizen.email }}" required>
+            </div>
+            <div class="input-group">
+                <label for="aadhaar_number">Aadhaar Number:</label>
+                <input type="text" id="aadhaar_number" name="aadhaar_number" value="{{ citizen.aadhaar_number }}" required>
+            </div>
+            <div class="input-group">
+                <label for="voter_id_number">Voter ID Number:</label>
+                <input type="text" id="voter_id_number" name="voter_id_number" value="{{ citizen.voter_id_number }}" required>
+            </div>
+            <div class="input-group">
+                <label for="constituency">Constituency:</label>
+                <input type="text" id="constituency" name="constituency" value="{{ citizen.constituency }}" required>
+            </div>
+            <button type="submit">Update Citizen</button>
+        </form>
+    </div>
+    <script src="{% static 'js/edit_citizen2.js' %}"></script>
+</body>
+</html>

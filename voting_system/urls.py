@@ -17,7 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user_management import views
-
+from user_management.views import EditExistingCitizenView
+from user_management.views import (
+    admin_panel,
+    admin_editing,
+    add_new_citizen,
+    edit_existing_citizen,
+    citizen_search_ajax,
+    update_citizen,
+    edit_citizen2,  # Import your edit view if you have a specific one
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +36,16 @@ urlpatterns = [
     path('add_new_citizen/', views.add_new_citizen, name='add_new_citizen'),
     path('edit_existing_citizen/', views.edit_existing_citizen, name='edit_existing_citizen'),
     path('add_edit_candidate/', views.add_edit_candidate, name='add_edit_candidate'),
-    
+
+
+    path('edit_existing_citizen/', EditExistingCitizenView.as_view(), name='edit_existing_citizen'),
+    path('citizen_search_ajax/', citizen_search_ajax, name='citizen_search_ajax'),
+
+
+    path('edit_citizen/<int:citizen_id>/', edit_citizen2, name='edit_citizen2'),
+    path('update_citizen/<int:citizen_id>/', update_citizen, name='update_citizen'),
+
+
     path('vote_status/', views.vote_status, name='vote_status'),
     path('vote/', views.vote, name='vote'),
     path('result/', views.result, name='result'),

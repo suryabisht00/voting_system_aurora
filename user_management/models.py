@@ -34,6 +34,7 @@ class CitizenData(models.Model):
     voter_id_number = models.CharField(max_length=10, unique=True)
     photo_aadhaar = models.ImageField(upload_to='photos/photo1/')
     photo_voter = models.ImageField(upload_to='photos/photo2/')
+    constituency = models.CharField(max_length=100, default='Unknown') 
 
     def __str__(self):
         return self.citizen_name
