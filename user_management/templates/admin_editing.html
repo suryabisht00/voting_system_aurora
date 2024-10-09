@@ -1,3 +1,4 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,22 @@
             <button id="addEditCandidateButton">Add/Edit Candidate</button>
         </div>
     </div>
-    <script src="{% static 'js/admin_editing.js' %}"></script>
+    <script >
+
+        document.getElementById('addNewUserButton').addEventListener('click', function() {
+            window.location.href = "{% url 'add_new_citizen' %}";
+        });
+        
+        document.getElementById('editExistingUserButton').addEventListener('click', function() {
+            window.location.href = "{% url 'edit_existing_citizen' %}";
+        });
+        
+        document.getElementById('addEditCandidateButton').addEventListener('click', function() {
+            window.location.href = "{% url 'add_edit_candidate' %}";
+        });
+
+    </script>
 </body>
 </html>
+
+

@@ -32,8 +32,8 @@ class CitizenData(models.Model):
     email = models.EmailField(unique=True)
     aadhaar_number = models.CharField(max_length=12, unique=True)
     voter_id_number = models.CharField(max_length=10, unique=True)
-    photo_aadhaar = models.ImageField(upload_to='photos/aadhaar/')
-    photo_voter = models.ImageField(upload_to='photos/voter/')
+    photo_aadhaar = models.ImageField(upload_to='photos/photo1/')
+    photo_voter = models.ImageField(upload_to='photos/photo2/')
 
     def __str__(self):
         return self.citizen_name
