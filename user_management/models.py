@@ -17,6 +17,7 @@ class Candidate(models.Model):
     constituency = models.CharField(max_length=255)
     party = models.CharField(max_length=255)
     vote_count = models.IntegerField(default=0)
+    photo = models.ImageField(upload_to='photos/candidate_photos/',default='Unknown')  # Added photo field
 
     def __str__(self):
         return f"{self.candidate_name} - {self.constituency}"

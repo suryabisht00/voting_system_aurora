@@ -28,6 +28,10 @@ from user_management.views import (
     edit_citizen2,  # Import your edit view if you have a specific one
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -51,4 +55,5 @@ urlpatterns = [
     path('result/', views.result, name='result'),
 ]
 
-
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,9 +10,10 @@ class AdminAdmin(admin.ModelAdmin):
 # Register Candidate model
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('candidate_name', 'constituency', 'party', 'vote_count')
+    list_display = ('candidate_name', 'constituency', 'party', 'vote_count', 'photo')  # Added photo
     search_fields = ('candidate_name', 'constituency', 'party')
     list_filter = ('constituency', 'party')
+
 
 # Register CitizenData model
 @admin.register(CitizenData)

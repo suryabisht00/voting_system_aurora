@@ -188,29 +188,50 @@ def update_citizen(request, citizen_id):
 
 
 
-# @login_required
-# def edit_citizen(request, citizen_id):
-#     try:
-#         citizen = CitizenData.objects.get(pk=citizen_id)
-#         # You can add logic here to edit the citizen's data, handle the form, etc.
-#         if request.method == 'POST':
-#             citizen.citizen_name = request.POST['citizen_name']
-#             citizen.father_name = request.POST['father_name']
-#             citizen.address = request.POST['address']
-#             # ... update other fields accordingly
-#             citizen.save()
-#             return redirect('edit_existing_citizen')  # Redirect after successful edit
-
-#         return render(request, 'edit_citizen_form.html', {'citizen': citizen})
-#     except CitizenData.DoesNotExist:
-#         return redirect('edit_existing_citizen')
-
-
 
 @login_required
 def add_edit_candidate(request):
-    return redirect('add_edit_candidate')  # You can replace this with the actual logic
+    if request.method == 'POST':
+        if 'candidate_id' in request.POST:  # Editing an existing candidate
+            candidate_id = request.POST.get('candidate_id')
+            try:
+                candidate = Candidate.objects.get(id=candidate_id)
 
+                candidate.candidate_name = request.POST.get('candidate_name')
+                candidate.constituency = request.POST.get('constituency')
+                candidate.party = request.POST.get('party')
+
+                # Check if a new photo has been uploaded
+                if 'photo' in request.FILES:
+                    candidate.photo = request.FILES['photo']
+
+                candidate.save()
+                messages.success(request, 'Candidate updated successfully!')
+            except Candidate.DoesNotExist:
+                messages.error(request, 'Candidate not found!')
+        else:  # Adding a new candidate
+            candidate_name = request.POST.get('candidate_name')
+            constituency = request.POST.get('constituency')
+            party = request.POST.get('party')
+            photo = request.FILES.get('photo')
+
+            # Create new candidate
+            try:
+                Candidate.objects.create(
+                    candidate_name=candidate_name,
+                    constituency=constituency,
+                    party=party,
+                    photo=photo
+                )
+                messages.success(request, 'Candidate added successfully!')
+            except Exception as e:
+                messages.error(request, f"Error adding candidate: {str(e)}")
+
+        return redirect('add_edit_candidate')
+
+    # Fetch all candidates to display
+    candidates = Candidate.objects.all()
+    return render(request, 'add_edit_candidate.html', {'candidates': candidates})
 
 
 

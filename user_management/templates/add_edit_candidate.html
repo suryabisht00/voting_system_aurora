@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add/Edit Candidate</title>
+    <link rel="stylesheet" href="{% static 'css/add_edit_candidate.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Add New Candidate</h2>
+
+      <!-- Form to add new candidate -->
+      <form id="addCandidateForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="candidate_name">Candidate Name:</label>
+          <input
+            type="text"
+            id="candidate_name"
+            name="candidate_name"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="constituency">Constituency:</label>
+          <input type="text" id="constituency" name="constituency" required />
+        </div>
+        <div class="input-group">
+          <label for="party">Party:</label>
+          <input type="text" id="party" name="party" required />
+        </div>
+        <div class="input-group">
+          <label for="photo">Photo:</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            required
+          />
+        </div>
+        <button type="submit">Add Candidate</button>
+      </form>
+
+      <!-- Search form -->
+      <h2>Search and Edit Candidate</h2>
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search by candidate name or constituency"
+      />
+
+      <!-- Container for displaying candidates -->
+      <div id="candidateList">
+        {% for candidate in candidates %}
+        <div class="candidate-item" data-id="{{ candidate.id }}">
+          {% if candidate.photo %}
+          <img src="{{ candidate.photo.url }}" alt="Candidate Photo" />
+          {% else %}
+          <p>No photo available</p>
+          {% endif %}
+
+          <p><strong>Name:</strong> {{ candidate.candidate_name }}</p>
+          <p><strong>Constituency:</strong> {{ candidate.constituency }}</p>
+          <p><strong>Party:</strong> {{ candidate.party }}</p>
+          <p><strong>Votes:</strong> {{ candidate.vote_count }}</p>
+          <button class="editBtn" data-id="{{ candidate.id }}">Edit</button>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Form to edit candidate -->
+      <div id="editCandidateForm" style="display: none">
+        <h3>Edit Candidate</h3>
+        <form method="POST" enctype="multipart/form-data" id="editForm">
+          {% csrf_token %}
+          <input type="hidden" id="edit_candidate_id" name="candidate_id" />
+          <div class="input-group">
+            <label for="edit_candidate_name">Candidate Name:</label>
+            <input
+              type="text"
+              id="edit_candidate_name"
+              name="candidate_name"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="edit_constituency">Constituency:</label>
+            <input
+              type="text"
+              id="edit_constituency"
+              name="constituency"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="edit_party">Party:</label>
+            <input type="text" id="edit_party" name="party" required />
+          </div>
+          <div class="input-group">
+            <label for="edit_photo">Photo:</label>
+            <input type="file" id="edit_photo" name="photo" accept="image/*" />
+          </div>
+          <button type="submit">Update Candidate</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="{% static 'js/add_edit_candidate.js' %}"></script>
+  </body>
+</html>

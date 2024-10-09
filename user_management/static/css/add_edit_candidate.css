@@ -1,0 +1,46 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+input[type="text"], textarea, select, input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#candidateList {
+    margin-top: 20px;
+}
+
+.candidate-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.candidate-item img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+}
+
+.editBtn {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 5px 10px;
+}
