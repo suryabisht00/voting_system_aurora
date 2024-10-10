@@ -103,3 +103,24 @@ button:hover {
         padding: 8px 16px;
     }
 }
+
+
+.logout-container {
+    text-align: right; /* Aligns the logout button to the right */
+    margin: 20px; /* Adds some space around the logout container */
+}
+
+.logout-button {
+    background-color: #ff4d4d; /* Red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Removes underline */
+    font-weight: bold; /* Makes text bold */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.logout-button:hover {
+    background-color: #e60000; /* Darker red on hover */
+}

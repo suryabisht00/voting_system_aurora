@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from user_management.models import Candidate, CitizenData
@@ -8,16 +5,15 @@ from aadhaar_voter_card.models import AadhaarVerification
 from voting.models import VotingStatus
 from .models import Admin
 from django.contrib import messages
-from .models import CitizenData
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from django.db.models import Q
 
+
 # Home Page View
 def home(request):
     return render(request, 'home_page.html')
-
 
 # Admin Panel View for Custom Admin Login
 def admin_panel(request):
@@ -40,7 +36,6 @@ def admin_panel(request):
     return render(request, 'admin_panel.html')  # Render the admin login page
 
 
-@login_required
 def admin_editing(request):
     # Ensure the admin user is logged in (session check)
     if 'admin_user_id' not in request.session:
@@ -50,7 +45,13 @@ def admin_editing(request):
     return render(request, 'admin_editing.html')
 
 
-@login_required
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')  # Redirect to your desired page after logout
+
+
 def add_new_citizen(request):
     if request.method == 'POST':
         # Extract data from POST request
@@ -94,12 +95,8 @@ def add_new_citizen(request):
     return render(request, 'add_new_citizen.html')
 
 
-
-@login_required
 def edit_existing_citizen(request):
     return render(request, 'edit_existing_citizen.html')
-
-from django.views.decorators.csrf import csrf_exempt
 
 # search existing citizen for edit
 class EditExistingCitizenView(TemplateView):
@@ -134,9 +131,6 @@ def citizen_search_ajax(request):
     return JsonResponse(results, safe=False)
 
 
-
-
-@login_required
 def edit_citizen2(request, citizen_id):
     # Get the citizen object by ID
     citizen = get_object_or_404(CitizenData, id=citizen_id)
@@ -162,7 +156,6 @@ def edit_citizen2(request, citizen_id):
     return render(request, 'edit_citizen2.html', {'citizen': citizen})
 
 
-@login_required
 def update_citizen(request, citizen_id):
     citizen = get_object_or_404(CitizenData, id=citizen_id)
 
@@ -185,11 +178,6 @@ def update_citizen(request, citizen_id):
     return render(request, 'edit_citizen2.html', {'citizen': citizen})
 
 
-
-
-
-
-@login_required
 def add_edit_candidate(request):
     if request.method == 'POST':
         if 'candidate_id' in request.POST:  # Editing an existing candidate
@@ -234,38 +222,14 @@ def add_edit_candidate(request):
     return render(request, 'add_edit_candidate.html', {'candidates': candidates})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Vote Status View
-@login_required
 def vote_status(request):
     pass
 
 # Voting View
-@login_required
 def vote(request):
     pass
 
 # Result View
-@login_required
 def result(request):
     pass
