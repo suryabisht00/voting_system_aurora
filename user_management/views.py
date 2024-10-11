@@ -9,13 +9,14 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from django.db.models import Q
-
+from django.views.decorators.cache import cache_control
 
 # Home Page View
 def home(request):
     return render(request, 'home_page.html')
 
 # Admin Panel View for Custom Admin Login
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_panel(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
@@ -36,20 +37,22 @@ def admin_panel(request):
     return render(request, 'admin_panel.html')  # Render the admin login page
 
 
+from django.views.decorators.cache import cache_control
+
+# Use cache_control decorator to prevent caching of this view
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def admin_editing(request):
-    # Ensure the admin user is logged in (session check)
     if 'admin_user_id' not in request.session:
         return redirect('admin_panel')
-
-    # Render the admin editing page with buttons
     return render(request, 'admin_editing.html')
 
 
-from django.contrib.auth import logout
 
 def logout_view(request):
-    logout(request)
-    return redirect('home')  # Redirect to your desired page after logout
+    if 'admin_user_id' in request.session:
+        del request.session['admin_user_id']  # Clear admin session
+    request.session.flush()  # Clears all session data
+    return redirect('home')
 
 
 def add_new_citizen(request):
