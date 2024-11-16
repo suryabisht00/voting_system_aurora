@@ -9,10 +9,10 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Admin Panel Login</h2>
+        <h2 style="color: #fafafa;">Admin Panel Login</h2>
         
         {% if messages %}
-            <ul>
+            <ul style="color: #fafafa;">
                 {% for message in messages %}
                     <li>{{ message }}</li>
                 {% endfor %}
@@ -22,14 +22,14 @@
         <form id="loginForm" method="POST" action="{% url 'admin_panel' %}">
             {% csrf_token %}
             <div class="input-group">
-                <label for="user_id">User ID:</label>
+                <label for="user_id" style="color: #fafafa;">User ID:</label>
                 <input type="text" id="user_id" name="user_id" required>
             </div>
             <div class="input-group">
-                <label for="password">Password:</label>
+                <label for="password" style="color: #fafafa;">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" style="color: #fafafa;">Login</button>
         </form>
 
         <!-- Home Button -->
